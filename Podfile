@@ -4,7 +4,7 @@ project 'AeroGearOAuth2.xcodeproj'
 platform :ios, '9.0'
 use_frameworks!
 
-target 'AeroGearOAuth2' do
+target 'FoviAeroGearOAuth2' do
 
   source 'https://github.com/NoahNelson/Fovi8Specs'
   pod 'Fovi8AeroGearHttp', '2.0.1'
