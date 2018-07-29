@@ -18,7 +18,7 @@
 import Foundation
 import UIKit
 import SafariServices
-import AeroGearHttp
+import Fovi8AeroGearHttp
 
 /**
 Notification constants emitted during oauth authorization flow.

@@ -16,7 +16,7 @@
 */
 
 import Foundation
-import AeroGearHttp
+import Fovi8AeroGearHttp
 
 /**
 An OAuth2Module subclass specific to 'Facebook' authorization
