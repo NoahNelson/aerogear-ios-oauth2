@@ -5,7 +5,9 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'AeroGearOAuth2' do
-  pod 'AeroGearHttp', '2.0.0'
+
+  source 'https://github.com/NoahNelson/Fovi8Specs'
+  pod 'Fovi8AeroGearHttp', '2.0.0'
 
   target 'AeroGearOAuth2Tests' do
       inherit! :search_paths
