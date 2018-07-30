@@ -152,7 +152,11 @@ open class OAuth2Module: AuthzModule {
                     config.webViewHandler(self.webView!, completionHandler)
                 }
             case .externalSafari:
-                UIApplication.shared.openURL(url)
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:])
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
             case .safariViewController:
                 let safariController = SFSafariViewController(url: url)
                 config.webViewHandler(safariController, completionHandler)
@@ -187,7 +191,7 @@ open class OAuth2Module: AuthzModule {
                         refreshToken = newRefreshToken
                     }
 
-                    self.oauth2Session.save(accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiration: exp, refreshTokenExpiration: nil, idToken: nil)
+                    self.oauth2Session.save(accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiration: exp, refreshTokenExpiration: "86400", idToken: nil)
 
                     completionHandler(unwrappedResponse["access_token"], nil)
                 }
@@ -202,7 +206,9 @@ open class OAuth2Module: AuthzModule {
     :param: completionHandler A block object to be executed when the request operation finishes.
     */
     open func exchangeAuthorizationCodeForAccessToken(code: String, completionHandler: @escaping (AnyObject?, NSError?) -> Void) {
-        var paramDict: [String: String] = ["code": code, "client_id": config.clientId, "redirect_uri": config.redirectURL, "grant_type":"authorization_code"]
+        var paramDict: [String: String] = ["code": code,
+                                           "client_id": config.clientId, "redirect_uri": config.redirectURL,
+            "grant_type":"authorization_code"]
 
         if let unwrapped = config.clientSecret {
             paramDict["client_secret"] = unwrapped
@@ -426,3 +432,4 @@ open class OAuth2Module: AuthzModule {
         }
     }
 }
+
